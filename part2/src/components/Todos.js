@@ -14,6 +14,25 @@ const StyledTodo = styled.p`
   }
 `
 
+const StyledInput = styled.input`
+  border-radius: 3px;
+  :focus {
+    border: solid 1px #EEA34A;
+  }
+
+`
+const StyledButton = styled.button`
+  border-radius: 3px;
+  position: relative;
+  display: inline-block;
+  color: #FFF;
+  background: #03A9F4;
+  border: solid 1px #0f9ada;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
+  text-shadow: 0 1px 0 rgba(0,0,0,0.2);
+`
+
 function Todos() {
   const [todos, setTodos] = useState(initTodos);
 
@@ -33,14 +52,16 @@ function Todos() {
   };
 
   const addTodo = () => {
-    const addTodo = {
-      id: todos.length + 1,
-      title: nextTodo,
-      done: false
-    };
+    if(nextTodo != ""){
+      const addTodo = {
+        id: todos.length + 1,
+        title: nextTodo,
+        done: false
+      };
 
-    setTodos([...todos, addTodo]);
-    setNextTodo("");
+      setTodos([...todos, addTodo]);
+      setNextTodo("");
+    }
   };
 
   console.log(todos);
@@ -48,8 +69,8 @@ function Todos() {
     <div>
       <h1>Todos</h1>
       <p>
-        <input type='text' value={nextTodo} onChange={changeTodo}/>
-        <button onClick={addTodo}>Add</button>
+        <StyledInput type='text' value={nextTodo} onChange={changeTodo}/>
+        <StyledButton onClick={addTodo}>Add</StyledButton>
       </p>
       {todos.map( todo =>
         <StyledTodo
